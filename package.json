@@ -1,0 +1,31 @@
+{
+  "name": "obsidian-brain",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "train": "node scripts/train-micro.mjs"
+  },
+  "dependencies": {
+    "@fontsource/jetbrains-mono": "^5.0.20",
+    "@fontsource/schibsted-grotesk": "^5.0.12",
+    "@fontsource/syne": "^5.0.16",
+    "gsap": "^3.12.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "zustand": "^4.5.5"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.3",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.10",
+    "vitest": "^2.1.5"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "width": 1440,
+  "height": 900,
+  "wait": 3500,
+  "shots": [
+    { "hash": "#/", "path": "C:\\Users\\RISHAV~1\\AppData\\Local\\Temp\\opencode\\r00-overture.png", "pause": 2600 },
+    { "hash": "#/tokens", "path": "C:\\Users\\RISHAV~1\\AppData\\Local\\Temp\\opencode\\r01-tokens.png", "pause": 2400 },
+    { "hash": "#/tokens", "path": "C:\\Users\\RISHAV~1\\AppData\\Local\\Temp\\opencode\\r01b-term.png", "pause": 900, "eval": "var t=document.querySelector('.term__trigger'); if(t){t.click();} 'clicked'" },
+    { "hash": "#/embeddings", "path": "C:\\Users\\RISHAV~1\\AppData\\Local\\Temp\\opencode\\r02-embeddings.png", "pause": 2400 },
+    { "hash": "#/position", "path": "C:\\Users\\RISHAV~1\\AppData\\Local\\Temp\\opencode\\r03-position.png", "pause": 2400 },
+    { "hash": "#/block", "path": "C:\\Users\\RISHAV~1\\AppData\\Local\\Temp\\opencode\\r04-block.png", "pause": 2400 },
+    { "hash": "#/block/attention", "path": "C:\\Users\\RISHAV~1\\AppData\\Local\\Temp\\opencode\\r05-attention.png", "pause": 3000 },
+    { "hash": "#/logits", "path": "C:\\Users\\RISHAV~1\\AppData\\Local\\Temp\\opencode\\r06-logits.png", "pause": 2400 },
+    { "hash": "#/sampling", "path": "C:\\Users\\RISHAV~1\\AppData\\Local\\Temp\\opencode\\r07-sampling.png", "pause": 2400 },
+    { "hash": "#/loop", "path": "C:\\Users\\RISHAV~1\\AppData\\Local\\Temp\\opencode\\r08-loop.png", "pause": 2400 },
+    { "hash": "#/atlas", "path": "C:\\Users\\RISHAV~1\\AppData\\Local\\Temp\\opencode\\r09-atlas.png", "pause": 3000 }
+  ],
+  "eval": "JSON.stringify({route: location.hash, title: document.title})"
+}

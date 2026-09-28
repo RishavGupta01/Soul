@@ -1,0 +1,83 @@
+:root {
+  /* ---- Void / surfaces ---- */
+  --void: #050507;
+  --panel: #0b0b10;
+  --raised: #101018;
+
+  /* ---- Hairlines ---- */
+  --hairline: rgba(255, 255, 255, 0.06);
+  --hairline-hover: rgba(255, 255, 255, 0.14);
+  --hairline-bright: rgba(255, 255, 255, 0.24);
+
+  /* ---- Accents ---- */
+  --cyan: #3de8ff;
+  --cyan-dim: rgba(61, 232, 255, 0.16);
+  --magenta: #ff3dae;
+  --magenta-dim: rgba(255, 61, 174, 0.16);
+  --violet: #8b5cff;
+
+  /* ---- Semantic ---- */
+  --forward: #4ade80;
+  --backward: #ffb454;
+  --error: #ff5c5c;
+  --info: #3de8ff;
+
+  /* ---- Ink ---- */
+  --ink: #ffffff;
+  --ink-body: #e8e8f0;
+  --ink-muted: #8a8a99;
+  --ink-faint: #52525f;
+
+  /* ---- Spacing scale (8px base) ---- */
+  --sp-2xs: 4px;
+  --sp-xs: 8px;
+  --sp-sm: 16px;
+  --sp-md: 24px;
+  --sp-lg: 32px;
+  --sp-xl: 48px;
+  --sp-2xl: 64px;
+  --sp-3xl: 96px;
+  --sp-4xl: 128px;
+
+  /* ---- Radii: sharp instrument ---- */
+  --r-sm: 2px;
+  --r-md: 4px;
+
+  /* ---- Motion ---- */
+  --ease-enter: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-exit: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-move: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 80ms;
+  --dur-short: 180ms;
+  --dur-medium: 320ms;
+  --dur-long: 600ms;
+  --dur-breathe: 6000ms;
+
+  /* ---- Type ---- */
+  --font-display: "Syne", system-ui, sans-serif;
+  --font-body: "Schibsted Grotesk", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --fs-2xs: 13px;
+  --fs-sm: 15px;
+  --fs-base: 17px;
+  --fs-md: 22px;
+  --fs-lg: 30px;
+  --fs-xl: 40px;
+  --fs-2xl: 54px;
+  --fs-3xl: 72px;
+  --fs-4xl: 96px;
+
+  --measure: 68ch;
+  --stage-w: 62vw;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-micro: 0ms;
+    --dur-short: 0ms;
+    --dur-medium: 0ms;
+    --dur-long: 0ms;
+    --dur-breathe: 0ms;
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "width": 390,
+  "height": 844,
+  "mobile": true,
+  "wait": 3500,
+  "shots": [
+    { "hash": "#/", "path": "C:\\Users\\RISHAV~1\\AppData\\Local\\Temp\\opencode\\m00-overture.png", "pause": 2400 },
+    { "hash": "#/tokens", "path": "C:\\Users\\RISHAV~1\\AppData\\Local\\Temp\\opencode\\m01-tokens.png", "pause": 2400 },
+    { "hash": "#/block/attention", "path": "C:\\Users\\RISHAV~1\\AppData\\Local\\Temp\\opencode\\m05-attention.png", "pause": 2600 },
+    { "hash": "#/sampling", "path": "C:\\Users\\RISHAV~1\\AppData\\Local\\Temp\\opencode\\m07-sampling.png", "pause": 2400 },
+    { "hash": "#/atlas", "path": "C:\\Users\\RISHAV~1\\AppData\\Local\\Temp\\opencode\\m09-atlas.png", "pause": 2600 }
+  ],
+  "eval": "JSON.stringify({w: innerWidth, h: innerHeight, overflowX: document.documentElement.scrollWidth > innerWidth ? document.documentElement.scrollWidth : 0})"
+}

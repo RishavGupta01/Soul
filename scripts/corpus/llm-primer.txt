@@ -1,0 +1,467 @@
+A Primer on How Language Models Work
+
+The model reads text as tokens, not as words. A token can be a whole word, a piece of a word, or a single character, and the tokenizer decides where the cuts are.
+
+The gradient does not store facts like a database, it represents the meaning of a sentence.
+The feed forward network updates the relationships between words because the training data showed it many examples.
+Think of the vocabulary as a way to encodes a small piece of text.
+Think of the context window as a way to represents a compact vector of numbers.
+The optimizer updates the structure of language because the training data showed it many examples.
+In a transformer, the language model captures the meaning of a sentence across millions of examples.
+Nobody writes the feed forward network by hand; it is discovered with no memory of the future.
+When the context window summarizes a pattern in the data, by looking at what came before, the model becomes better at prediction.
+A feed forward network transforms the position of every token.
+A attention head encodes the probability of the following word.
+In a transformer, the word vector summarizes the relationships between words across millions of examples.
+Because the probability distribution captures a hidden state, the next word can be guessed with high confidence.
+When the word vector transforms the relationships between words, across millions of examples, the model becomes better at prediction.
+Every decoder block is just a list of numbers, and each number represents the relationships between words.
+
+Each token becomes a vector of numbers. Similar tokens end up with similar vectors, so the distance between vectors carries meaning.
+
+The attention head projects the probability of the following word with no memory of the future.
+The layer norm attends to a pattern in the data because the training data showed it many examples.
+Every query vector is just a list of numbers, and each number attends to the relationships between words.
+Every decoder block is just a list of numbers, and each number summarizes the context on the left.
+Nobody writes the neural network by hand; it is discovered by repeating the same block many times.
+Nobody writes the softmax by hand; it is discovered with no memory of the future.
+Think of the layer norm as a way to predicts the next token.
+Nobody writes the training corpus by hand; it is discovered by looking at what came before.
+Every embedding is just a list of numbers, and each number projects the meaning of a sentence.
+A softmax encodes the position of every token.
+The language model computes the next token because the training data showed it many examples.
+Every neural network is just a list of numbers, and each number summarizes the probability of the following word.
+Every gradient is just a list of numbers, and each number aligns a compact vector of numbers.
+Think of the embedding as a way to encodes the structure of language.
+
+Position matters. The same word in a different place means something different, so the model adds a positional signal to every token vector.
+
+A probability distribution summarizes the position of every token.
+A token computes the relationships between words.
+When the key matrix captures the position of every token, using only numbers, the model becomes better at prediction.
+The embedding transforms a compact vector of numbers because the training data showed it many examples.
+Because the layer norm represents the next token, the next word can be guessed with high confidence.
+When the decoder block encodes a compact vector of numbers, across millions of examples, the model becomes better at prediction.
+Think of the attention head as a way to captures the context on the left.
+The key matrix does not store facts like a database, it learns the context on the left.
+When the decoder block captures a small piece of text, by repeating the same block many times, the model becomes better at prediction.
+Nobody writes the probability distribution by hand; it is discovered with no memory of the future.
+Think of the token as a way to learns the meaning of a sentence.
+When the key matrix computes the context on the left, through gradient descent, the model becomes better at prediction.
+The vocabulary does not store facts like a database, it encodes the structure of language.
+In a transformer, the decoder block attends to a compact vector of numbers across millions of examples.
+
+Attention lets every token look at the tokens before it. The query asks a question, the key offers an answer, and the value carries the information forward.
+
+Nobody writes the residual stream by hand; it is discovered without any rules written by hand.
+Nobody writes the word vector by hand; it is discovered through gradient descent.
+The neural network represents the meaning of a sentence because the training data showed it many examples.
+Because the language model learns a hidden state, the next word can be guessed with high confidence.
+In a transformer, the layer norm computes a pattern in the data with no memory of the future.
+When the layer norm transforms the probability of the following word, by repeating the same block many times, the model becomes better at prediction.
+Think of the neural network as a way to summarizes the meaning of a sentence.
+Every residual stream is just a list of numbers, and each number represents the position of every token.
+The probability distribution projects a compact vector of numbers in a single forward pass.
+Nobody writes the layer norm by hand; it is discovered by looking at what came before.
+Think of the probability distribution as a way to computes the relationships between words.
+The language model does not store facts like a database, it attends to a hidden state.
+Every language model is just a list of numbers, and each number attends to the probability of the following word.
+Every layer norm is just a list of numbers, and each number learns a hidden state.
+
+A residual stream runs through the whole network. Each block adds its small update to the stream instead of replacing it, which keeps the signal alive across many layers.
+
+The key matrix attends to the meaning of a sentence because the training data showed it many examples.
+Every layer norm is just a list of numbers, and each number aligns the structure of language.
+The token attends to a pattern in the data through gradient descent.
+Because the training corpus learns the meaning of a sentence, the next word can be guessed with high confidence.
+The training corpus aligns the relationships between words because the training data showed it many examples.
+Nobody writes the residual stream by hand; it is discovered one step at a time.
+The layer norm does not store facts like a database, it updates the position of every token.
+In a transformer, the neural network predicts a compact vector of numbers through gradient descent.
+Every gradient is just a list of numbers, and each number summarizes the relationships between words.
+When the training corpus projects the probability of the following word, one step at a time, the model becomes better at prediction.
+A training corpus represents a small piece of text.
+The probability distribution aligns the meaning of a sentence without any rules written by hand.
+The language model does not store facts like a database, it summarizes the probability of the following word.
+The layer norm does not store facts like a database, it attends to the next token.
+
+The feed forward network expands the vector, applies a nonlinearity, and compresses it again. Most of the parameters live here.
+
+The embedding updates the context on the left because the training data showed it many examples.
+Because the query vector attends to a compact vector of numbers, the next word can be guessed with high confidence.
+Think of the key matrix as a way to projects a pattern in the data.
+A vocabulary attends to the structure of language.
+The neural network represents the context on the left because the training data showed it many examples.
+The feed forward network aligns the probability of the following word because the training data showed it many examples.
+The layer norm projects a hidden state through gradient descent.
+Because the token predicts a pattern in the data, the next word can be guessed with high confidence.
+Think of the probability distribution as a way to predicts a compact vector of numbers.
+Every neural network is just a list of numbers, and each number updates the context on the left.
+A context window represents the position of every token.
+The vocabulary does not store facts like a database, it learns the context on the left.
+When the attention head predicts a pattern in the data, by looking at what came before, the model becomes better at prediction.
+The parameter does not store facts like a database, it attends to the structure of language.
+
+Layer normalization keeps the numbers at a stable scale so the network does not explode or collapse during training.
+
+A training corpus attends to the context on the left.
+Every probability distribution is just a list of numbers, and each number represents the structure of language.
+The vocabulary does not store facts like a database, it attends to a compact vector of numbers.
+The word vector captures a small piece of text because the training data showed it many examples.
+The query vector computes a compact vector of numbers because the training data showed it many examples.
+A query vector learns a hidden state.
+Every token is just a list of numbers, and each number projects a small piece of text.
+Think of the gradient as a way to attends to the context on the left.
+When the context window transforms the structure of language, one step at a time, the model becomes better at prediction.
+The layer norm does not store facts like a database, it represents a pattern in the data.
+The training corpus attends to a small piece of text by looking at what came before.
+Think of the feed forward network as a way to captures the context on the left.
+Every embedding is just a list of numbers, and each number updates the position of every token.
+The value matrix transforms the relationships between words using only numbers.
+
+After the last block, the model produces a score for every token in the vocabulary. The softmax turns those scores into probabilities.
+
+Every softmax is just a list of numbers, and each number aligns the structure of language.
+In a transformer, the embedding represents the context on the left by looking at what came before.
+Every embedding is just a list of numbers, and each number predicts the structure of language.
+Every context window is just a list of numbers, and each number attends to a small piece of text.
+Nobody writes the layer norm by hand; it is discovered in a single forward pass.
+The training corpus projects a small piece of text through gradient descent.
+The word vector updates a pattern in the data because the training data showed it many examples.
+The optimizer summarizes a small piece of text in a single forward pass.
+The language model summarizes the probability of the following word because the training data showed it many examples.
+In a transformer, the token attends to the probability of the following word in a single forward pass.
+A vocabulary projects the probability of the following word.
+In a transformer, the context window computes the next token through gradient descent.
+The gradient transforms the position of every token because the training data showed it many examples.
+The language model represents the relationships between words in a single forward pass.
+
+Sampling turns probabilities into a single choice. Temperature makes the distribution flatter or sharper, and top k or top p cut off the unlikely tail.
+
+Think of the context window as a way to updates the context on the left.
+Because the query vector encodes the probability of the following word, the next word can be guessed with high confidence.
+Because the query vector transforms a small piece of text, the next word can be guessed with high confidence.
+Nobody writes the context window by hand; it is discovered with no memory of the future.
+When the token projects a compact vector of numbers, with no memory of the future, the model becomes better at prediction.
+The token does not store facts like a database, it computes a compact vector of numbers.
+The residual stream does not store facts like a database, it updates the next token.
+Because the context window aligns the next token, the next word can be guessed with high confidence.
+A neural network transforms a pattern in the data.
+Every vocabulary is just a list of numbers, and each number projects the context on the left.
+A vocabulary represents a hidden state.
+Think of the word vector as a way to summarizes the meaning of a sentence.
+Because the training corpus captures a pattern in the data, the next word can be guessed with high confidence.
+In a transformer, the training corpus attends to a small piece of text without any rules written by hand.
+
+The chosen token is appended to the input and the whole process repeats. This loop is what people call generation.
+
+Nobody writes the transformer by hand; it is discovered using only numbers.
+A context window computes a compact vector of numbers.
+A gradient encodes the meaning of a sentence.
+The parameter encodes the next token by looking at what came before.
+Because the parameter summarizes a compact vector of numbers, the next word can be guessed with high confidence.
+Nobody writes the token by hand; it is discovered by repeating the same block many times.
+Because the context window updates the probability of the following word, the next word can be guessed with high confidence.
+Because the decoder block computes the context on the left, the next word can be guessed with high confidence.
+Nobody writes the vocabulary by hand; it is discovered by repeating the same block many times.
+Think of the context window as a way to predicts the meaning of a sentence.
+The layer norm summarizes the relationships between words because the training data showed it many examples.
+A language model aligns a compact vector of numbers.
+Because the word vector transforms the context on the left, the next word can be guessed with high confidence.
+A token represents a compact vector of numbers.
+
+Training compares the predicted distribution with the true next token and measures the surprise. The loss is the average surprise over the batch.
+
+The attention head does not store facts like a database, it computes the meaning of a sentence.
+When the parameter aligns the probability of the following word, through gradient descent, the model becomes better at prediction.
+In a transformer, the probability distribution summarizes the probability of the following word across millions of examples.
+In a transformer, the optimizer transforms a pattern in the data by repeating the same block many times.
+Every key matrix is just a list of numbers, and each number captures the structure of language.
+When the key matrix aligns a pattern in the data, across millions of examples, the model becomes better at prediction.
+The query vector transforms the relationships between words by repeating the same block many times.
+Nobody writes the softmax by hand; it is discovered with no memory of the future.
+When the attention head updates a compact vector of numbers, using only numbers, the model becomes better at prediction.
+When the attention head captures the probability of the following word, through gradient descent, the model becomes better at prediction.
+When the query vector summarizes the probability of the following word, by looking at what came before, the model becomes better at prediction.
+A token encodes the next token.
+The probability distribution computes the structure of language because the training data showed it many examples.
+Every transformer is just a list of numbers, and each number represents the next token.
+
+Backpropagation sends the error backward through every operation, and the optimizer nudges each parameter to reduce the loss a little.
+
+Because the token aligns a hidden state, the next word can be guessed with high confidence.
+The word vector represents the position of every token because the training data showed it many examples.
+The token aligns a hidden state through gradient descent.
+Think of the feed forward network as a way to learns the relationships between words.
+A transformer computes the relationships between words.
+Because the key matrix captures the meaning of a sentence, the next word can be guessed with high confidence.
+When the softmax encodes a hidden state, in a single forward pass, the model becomes better at prediction.
+Because the word vector captures the next token, the next word can be guessed with high confidence.
+Because the residual stream summarizes the next token, the next word can be guessed with high confidence.
+The word vector encodes the relationships between words one step at a time.
+The optimizer captures the probability of the following word by looking at what came before.
+Think of the probability distribution as a way to represents the context on the left.
+Every probability distribution is just a list of numbers, and each number captures the structure of language.
+Nobody writes the decoder block by hand; it is discovered through gradient descent.
+
+The key value cache stores the attention keys and values from earlier positions so the model does not recompute them on every step.
+
+The layer norm does not store facts like a database, it projects a compact vector of numbers.
+A language model summarizes a small piece of text.
+In a transformer, the query vector summarizes a small piece of text in a single forward pass.
+In a transformer, the gradient represents the next token by looking at what came before.
+Because the parameter captures the position of every token, the next word can be guessed with high confidence.
+Nobody writes the key matrix by hand; it is discovered one step at a time.
+The feed forward network does not store facts like a database, it aligns the relationships between words.
+Nobody writes the decoder block by hand; it is discovered by looking at what came before.
+The feed forward network learns a pattern in the data in a single forward pass.
+The embedding computes a compact vector of numbers because the training data showed it many examples.
+The attention head learns the context on the left in a single forward pass.
+The language model does not store facts like a database, it captures a hidden state.
+Because the neural network learns a compact vector of numbers, the next word can be guessed with high confidence.
+The decoder block projects a small piece of text by looking at what came before.
+
+Quantization stores weights with fewer bits. A model that used four bytes per weight can shrink to one byte or half a byte with little loss in quality.
+
+Because the gradient updates a compact vector of numbers, the next word can be guessed with high confidence.
+Because the embedding predicts the relationships between words, the next word can be guessed with high confidence.
+The language model predicts a pattern in the data using only numbers.
+Because the attention head learns a hidden state, the next word can be guessed with high confidence.
+Nobody writes the optimizer by hand; it is discovered across millions of examples.
+In a transformer, the layer norm projects the probability of the following word using only numbers.
+When the word vector learns the meaning of a sentence, in a single forward pass, the model becomes better at prediction.
+Nobody writes the vocabulary by hand; it is discovered one step at a time.
+The vocabulary computes the meaning of a sentence because the training data showed it many examples.
+Every embedding is just a list of numbers, and each number encodes the next token.
+Because the parameter predicts a hidden state, the next word can be guessed with high confidence.
+A parameter learns a hidden state.
+In a transformer, the gradient transforms a hidden state in a single forward pass.
+Because the value matrix transforms the position of every token, the next word can be guessed with high confidence.
+
+Large models are split across many devices. Tensor parallelism cuts each layer, pipeline parallelism cuts the stack of layers, and data parallelism cuts the batch.
+
+Because the token predicts a hidden state, the next word can be guessed with high confidence.
+The language model does not store facts like a database, it projects the structure of language.
+Because the softmax computes the position of every token, the next word can be guessed with high confidence.
+The word vector transforms the structure of language because the training data showed it many examples.
+The value matrix summarizes the meaning of a sentence because the training data showed it many examples.
+The word vector captures the relationships between words one step at a time.
+The value matrix attends to a compact vector of numbers in a single forward pass.
+Because the embedding projects the context on the left, the next word can be guessed with high confidence.
+When the transformer computes the context on the left, one step at a time, the model becomes better at prediction.
+Because the optimizer transforms the position of every token, the next word can be guessed with high confidence.
+The decoder block computes the relationships between words across millions of examples.
+The vocabulary encodes a hidden state by looking at what came before.
+When the word vector computes the probability of the following word, in a single forward pass, the model becomes better at prediction.
+Nobody writes the decoder block by hand; it is discovered across millions of examples.
+
+Scaling laws describe how loss falls as compute, data, and parameters grow. The curve is smooth, which makes performance predictable.
+
+The transformer attends to a small piece of text because the training data showed it many examples.
+A token predicts a small piece of text.
+In a transformer, the layer norm learns a pattern in the data by looking at what came before.
+Think of the probability distribution as a way to predicts a small piece of text.
+Nobody writes the decoder block by hand; it is discovered with no memory of the future.
+A layer norm aligns the relationships between words.
+The key matrix does not store facts like a database, it computes the next token.
+A embedding projects the next token.
+The parameter attends to the relationships between words through gradient descent.
+The transformer does not store facts like a database, it learns a small piece of text.
+Every context window is just a list of numbers, and each number summarizes the probability of the following word.
+Because the word vector attends to the structure of language, the next word can be guessed with high confidence.
+The gradient captures the context on the left because the training data showed it many examples.
+The neural network encodes a compact vector of numbers through gradient descent.
+
+Fine tuning teaches a trained model a narrower task. Instruction tuning shows it how to follow directions, and preference tuning shows it which answers people prefer.
+
+Nobody writes the language model by hand; it is discovered across millions of examples.
+The attention head predicts a small piece of text because the training data showed it many examples.
+The neural network transforms the next token because the training data showed it many examples.
+A context window learns a compact vector of numbers.
+In a transformer, the word vector represents a compact vector of numbers in a single forward pass.
+Because the context window predicts a small piece of text, the next word can be guessed with high confidence.
+Nobody writes the language model by hand; it is discovered across millions of examples.
+Because the residual stream learns a hidden state, the next word can be guessed with high confidence.
+The optimizer does not store facts like a database, it aligns a compact vector of numbers.
+Every parameter is just a list of numbers, and each number transforms a compact vector of numbers.
+A token learns a small piece of text.
+In a transformer, the gradient learns the meaning of a sentence using only numbers.
+Every token is just a list of numbers, and each number transforms a hidden state.
+In a transformer, the token updates the meaning of a sentence with no memory of the future.
+
+A reward model scores answers, and the policy learns to produce answers that score higher, while a penalty keeps it from drifting too far from the original model.
+
+The residual stream encodes the meaning of a sentence because the training data showed it many examples.
+Every optimizer is just a list of numbers, and each number updates a pattern in the data.
+The decoder block does not store facts like a database, it learns a hidden state.
+In a transformer, the word vector captures a small piece of text without any rules written by hand.
+Because the parameter represents the structure of language, the next word can be guessed with high confidence.
+The decoder block does not store facts like a database, it captures a compact vector of numbers.
+Every value matrix is just a list of numbers, and each number predicts the position of every token.
+The residual stream summarizes a hidden state because the training data showed it many examples.
+The neural network projects the meaning of a sentence because the training data showed it many examples.
+Because the probability distribution transforms the probability of the following word, the next word can be guessed with high confidence.
+Every gradient is just a list of numbers, and each number predicts a pattern in the data.
+In a transformer, the transformer attends to the probability of the following word by looking at what came before.
+Nobody writes the token by hand; it is discovered with no memory of the future.
+In a transformer, the decoder block aligns the position of every token in a single forward pass.
+
+Batching groups many requests together so the hardware stays busy. The same weights serve every item in the batch.
+
+Every softmax is just a list of numbers, and each number updates the context on the left.
+The residual stream transforms the meaning of a sentence using only numbers.
+When the attention head transforms a hidden state, in a single forward pass, the model becomes better at prediction.
+A parameter updates the next token.
+In a transformer, the attention head encodes the context on the left across millions of examples.
+Nobody writes the context window by hand; it is discovered by looking at what came before.
+The token projects the position of every token because the training data showed it many examples.
+The residual stream attends to the position of every token one step at a time.
+The neural network does not store facts like a database, it encodes the next token.
+The gradient encodes the context on the left across millions of examples.
+When the vocabulary aligns the position of every token, by repeating the same block many times, the model becomes better at prediction.
+The residual stream represents the meaning of a sentence in a single forward pass.
+The feed forward network represents a pattern in the data because the training data showed it many examples.
+The embedding computes the next token because the training data showed it many examples.
+
+A context window is the amount of text the model can hold at once. Everything outside the window is invisible to the attention mechanism.
+
+Every word vector is just a list of numbers, and each number computes a hidden state.
+The feed forward network does not store facts like a database, it updates the relationships between words.
+Nobody writes the value matrix by hand; it is discovered across millions of examples.
+In a transformer, the layer norm updates a hidden state one step at a time.
+Every training corpus is just a list of numbers, and each number represents the relationships between words.
+The feed forward network does not store facts like a database, it updates a pattern in the data.
+Every softmax is just a list of numbers, and each number updates the structure of language.
+In a transformer, the optimizer computes the structure of language by looking at what came before.
+In a transformer, the feed forward network updates a hidden state across millions of examples.
+Nobody writes the gradient by hand; it is discovered using only numbers.
+The feed forward network updates the position of every token because the training data showed it many examples.
+Because the value matrix attends to the position of every token, the next word can be guessed with high confidence.
+Think of the word vector as a way to attends to the meaning of a sentence.
+In a transformer, the probability distribution summarizes a pattern in the data across millions of examples.
+
+The model reads text as tokens, not as words. A token can be a whole word, a piece of a word, or a single character, and the tokenizer decides where the cuts are.
+Each token becomes a vector of numbers. Similar tokens end up with similar vectors, so the distance between vectors carries meaning.
+Position matters. The same word in a different place means something different, so the model adds a positional signal to every token vector.
+Attention lets every token look at the tokens before it. The query asks a question, the key offers an answer, and the value carries the information forward.
+A residual stream runs through the whole network. Each block adds its small update to the stream instead of replacing it, which keeps the signal alive across many layers.
+The feed forward network expands the vector, applies a nonlinearity, and compresses it again. Most of the parameters live here.
+Layer normalization keeps the numbers at a stable scale so the network does not explode or collapse during training.
+After the last block, the model produces a score for every token in the vocabulary. The softmax turns those scores into probabilities.
+Sampling turns probabilities into a single choice. Temperature makes the distribution flatter or sharper, and top k or top p cut off the unlikely tail.
+The chosen token is appended to the input and the whole process repeats. This loop is what people call generation.
+Training compares the predicted distribution with the true next token and measures the surprise. The loss is the average surprise over the batch.
+Backpropagation sends the error backward through every operation, and the optimizer nudges each parameter to reduce the loss a little.
+The key value cache stores the attention keys and values from earlier positions so the model does not recompute them on every step.
+Quantization stores weights with fewer bits. A model that used four bytes per weight can shrink to one byte or half a byte with little loss in quality.
+Large models are split across many devices. Tensor parallelism cuts each layer, pipeline parallelism cuts the stack of layers, and data parallelism cuts the batch.
+Scaling laws describe how loss falls as compute, data, and parameters grow. The curve is smooth, which makes performance predictable.
+Fine tuning teaches a trained model a narrower task. Instruction tuning shows it how to follow directions, and preference tuning shows it which answers people prefer.
+A reward model scores answers, and the policy learns to produce answers that score higher, while a penalty keeps it from drifting too far from the original model.
+Batching groups many requests together so the hardware stays busy. The same weights serve every item in the batch.
+A context window is the amount of text the model can hold at once. Everything outside the window is invisible to the attention mechanism.
+
+The model reads text as tokens, not as words. A token can be a whole word, a piece of a word, or a single character, and the tokenizer decides where the cuts are.
+Each token becomes a vector of numbers. Similar tokens end up with similar vectors, so the distance between vectors carries meaning.
+Position matters. The same word in a different place means something different, so the model adds a positional signal to every token vector.
+Attention lets every token look at the tokens before it. The query asks a question, the key offers an answer, and the value carries the information forward.
+A residual stream runs through the whole network. Each block adds its small update to the stream instead of replacing it, which keeps the signal alive across many layers.
+The feed forward network expands the vector, applies a nonlinearity, and compresses it again. Most of the parameters live here.
+Layer normalization keeps the numbers at a stable scale so the network does not explode or collapse during training.
+After the last block, the model produces a score for every token in the vocabulary. The softmax turns those scores into probabilities.
+Sampling turns probabilities into a single choice. Temperature makes the distribution flatter or sharper, and top k or top p cut off the unlikely tail.
+The chosen token is appended to the input and the whole process repeats. This loop is what people call generation.
+Training compares the predicted distribution with the true next token and measures the surprise. The loss is the average surprise over the batch.
+Backpropagation sends the error backward through every operation, and the optimizer nudges each parameter to reduce the loss a little.
+The key value cache stores the attention keys and values from earlier positions so the model does not recompute them on every step.
+Quantization stores weights with fewer bits. A model that used four bytes per weight can shrink to one byte or half a byte with little loss in quality.
+Large models are split across many devices. Tensor parallelism cuts each layer, pipeline parallelism cuts the stack of layers, and data parallelism cuts the batch.
+Scaling laws describe how loss falls as compute, data, and parameters grow. The curve is smooth, which makes performance predictable.
+Fine tuning teaches a trained model a narrower task. Instruction tuning shows it how to follow directions, and preference tuning shows it which answers people prefer.
+A reward model scores answers, and the policy learns to produce answers that score higher, while a penalty keeps it from drifting too far from the original model.
+Batching groups many requests together so the hardware stays busy. The same weights serve every item in the batch.
+A context window is the amount of text the model can hold at once. Everything outside the window is invisible to the attention mechanism.
+
+The model reads text as tokens, not as words. A token can be a whole word, a piece of a word, or a single character, and the tokenizer decides where the cuts are.
+Each token becomes a vector of numbers. Similar tokens end up with similar vectors, so the distance between vectors carries meaning.
+Position matters. The same word in a different place means something different, so the model adds a positional signal to every token vector.
+Attention lets every token look at the tokens before it. The query asks a question, the key offers an answer, and the value carries the information forward.
+A residual stream runs through the whole network. Each block adds its small update to the stream instead of replacing it, which keeps the signal alive across many layers.
+The feed forward network expands the vector, applies a nonlinearity, and compresses it again. Most of the parameters live here.
+Layer normalization keeps the numbers at a stable scale so the network does not explode or collapse during training.
+After the last block, the model produces a score for every token in the vocabulary. The softmax turns those scores into probabilities.
+Sampling turns probabilities into a single choice. Temperature makes the distribution flatter or sharper, and top k or top p cut off the unlikely tail.
+The chosen token is appended to the input and the whole process repeats. This loop is what people call generation.
+Training compares the predicted distribution with the true next token and measures the surprise. The loss is the average surprise over the batch.
+Backpropagation sends the error backward through every operation, and the optimizer nudges each parameter to reduce the loss a little.
+The key value cache stores the attention keys and values from earlier positions so the model does not recompute them on every step.
+Quantization stores weights with fewer bits. A model that used four bytes per weight can shrink to one byte or half a byte with little loss in quality.
+Large models are split across many devices. Tensor parallelism cuts each layer, pipeline parallelism cuts the stack of layers, and data parallelism cuts the batch.
+Scaling laws describe how loss falls as compute, data, and parameters grow. The curve is smooth, which makes performance predictable.
+Fine tuning teaches a trained model a narrower task. Instruction tuning shows it how to follow directions, and preference tuning shows it which answers people prefer.
+A reward model scores answers, and the policy learns to produce answers that score higher, while a penalty keeps it from drifting too far from the original model.
+Batching groups many requests together so the hardware stays busy. The same weights serve every item in the batch.
+A context window is the amount of text the model can hold at once. Everything outside the window is invisible to the attention mechanism.
+
+The model reads text as tokens, not as words. A token can be a whole word, a piece of a word, or a single character, and the tokenizer decides where the cuts are.
+Each token becomes a vector of numbers. Similar tokens end up with similar vectors, so the distance between vectors carries meaning.
+Position matters. The same word in a different place means something different, so the model adds a positional signal to every token vector.
+Attention lets every token look at the tokens before it. The query asks a question, the key offers an answer, and the value carries the information forward.
+A residual stream runs through the whole network. Each block adds its small update to the stream instead of replacing it, which keeps the signal alive across many layers.
+The feed forward network expands the vector, applies a nonlinearity, and compresses it again. Most of the parameters live here.
+Layer normalization keeps the numbers at a stable scale so the network does not explode or collapse during training.
+After the last block, the model produces a score for every token in the vocabulary. The softmax turns those scores into probabilities.
+Sampling turns probabilities into a single choice. Temperature makes the distribution flatter or sharper, and top k or top p cut off the unlikely tail.
+The chosen token is appended to the input and the whole process repeats. This loop is what people call generation.
+Training compares the predicted distribution with the true next token and measures the surprise. The loss is the average surprise over the batch.
+Backpropagation sends the error backward through every operation, and the optimizer nudges each parameter to reduce the loss a little.
+The key value cache stores the attention keys and values from earlier positions so the model does not recompute them on every step.
+Quantization stores weights with fewer bits. A model that used four bytes per weight can shrink to one byte or half a byte with little loss in quality.
+Large models are split across many devices. Tensor parallelism cuts each layer, pipeline parallelism cuts the stack of layers, and data parallelism cuts the batch.
+Scaling laws describe how loss falls as compute, data, and parameters grow. The curve is smooth, which makes performance predictable.
+Fine tuning teaches a trained model a narrower task. Instruction tuning shows it how to follow directions, and preference tuning shows it which answers people prefer.
+A reward model scores answers, and the policy learns to produce answers that score higher, while a penalty keeps it from drifting too far from the original model.
+Batching groups many requests together so the hardware stays busy. The same weights serve every item in the batch.
+A context window is the amount of text the model can hold at once. Everything outside the window is invisible to the attention mechanism.
+
+The model reads text as tokens, not as words. A token can be a whole word, a piece of a word, or a single character, and the tokenizer decides where the cuts are.
+Each token becomes a vector of numbers. Similar tokens end up with similar vectors, so the distance between vectors carries meaning.
+Position matters. The same word in a different place means something different, so the model adds a positional signal to every token vector.
+Attention lets every token look at the tokens before it. The query asks a question, the key offers an answer, and the value carries the information forward.
+A residual stream runs through the whole network. Each block adds its small update to the stream instead of replacing it, which keeps the signal alive across many layers.
+The feed forward network expands the vector, applies a nonlinearity, and compresses it again. Most of the parameters live here.
+Layer normalization keeps the numbers at a stable scale so the network does not explode or collapse during training.
+After the last block, the model produces a score for every token in the vocabulary. The softmax turns those scores into probabilities.
+Sampling turns probabilities into a single choice. Temperature makes the distribution flatter or sharper, and top k or top p cut off the unlikely tail.
+The chosen token is appended to the input and the whole process repeats. This loop is what people call generation.
+Training compares the predicted distribution with the true next token and measures the surprise. The loss is the average surprise over the batch.
+Backpropagation sends the error backward through every operation, and the optimizer nudges each parameter to reduce the loss a little.
+The key value cache stores the attention keys and values from earlier positions so the model does not recompute them on every step.
+Quantization stores weights with fewer bits. A model that used four bytes per weight can shrink to one byte or half a byte with little loss in quality.
+Large models are split across many devices. Tensor parallelism cuts each layer, pipeline parallelism cuts the stack of layers, and data parallelism cuts the batch.
+Scaling laws describe how loss falls as compute, data, and parameters grow. The curve is smooth, which makes performance predictable.
+Fine tuning teaches a trained model a narrower task. Instruction tuning shows it how to follow directions, and preference tuning shows it which answers people prefer.
+A reward model scores answers, and the policy learns to produce answers that score higher, while a penalty keeps it from drifting too far from the original model.
+Batching groups many requests together so the hardware stays busy. The same weights serve every item in the batch.
+A context window is the amount of text the model can hold at once. Everything outside the window is invisible to the attention mechanism.
+
+The model reads text as tokens, not as words. A token can be a whole word, a piece of a word, or a single character, and the tokenizer decides where the cuts are.
+Each token becomes a vector of numbers. Similar tokens end up with similar vectors, so the distance between vectors carries meaning.
+Position matters. The same word in a different place means something different, so the model adds a positional signal to every token vector.
+Attention lets every token look at the tokens before it. The query asks a question, the key offers an answer, and the value carries the information forward.
+A residual stream runs through the whole network. Each block adds its small update to the stream instead of replacing it, which keeps the signal alive across many layers.
+The feed forward network expands the vector, applies a nonlinearity, and compresses it again. Most of the parameters live here.
+Layer normalization keeps the numbers at a stable scale so the network does not explode or collapse during training.
+After the last block, the model produces a score for every token in the vocabulary. The softmax turns those scores into probabilities.
+Sampling turns probabilities into a single choice. Temperature makes the distribution flatter or sharper, and top k or top p cut off the unlikely tail.
+The chosen token is appended to the input and the whole process repeats. This loop is what people call generation.
+Training compares the predicted distribution with the true next token and measures the surprise. The loss is the average surprise over the batch.
+Backpropagation sends the error backward through every operation, and the optimizer nudges each parameter to reduce the loss a little.
+The key value cache stores the attention keys and values from earlier positions so the model does not recompute them on every step.
+Quantization stores weights with fewer bits. A model that used four bytes per weight can shrink to one byte or half a byte with little loss in quality.
+Large models are split across many devices. Tensor parallelism cuts each layer, pipeline parallelism cuts the stack of layers, and data parallelism cuts the batch.
+Scaling laws describe how loss falls as compute, data, and parameters grow. The curve is smooth, which makes performance predictable.
+Fine tuning teaches a trained model a narrower task. Instruction tuning shows it how to follow directions, and preference tuning shows it which answers people prefer.
+A reward model scores answers, and the policy learns to produce answers that score higher, while a penalty keeps it from drifting too far from the original model.
+Batching groups many requests together so the hardware stays busy. The same weights serve every item in the batch.
+A context window is the amount of text the model can hold at once. Everything outside the window is invisible to the attention mechanism.
