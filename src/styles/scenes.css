@@ -923,10 +923,10 @@
   grid-template-columns: minmax(0, 30px) minmax(0, 78px) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 110px);
   gap: var(--sp-sm);
   align-items: center;
-  padding: 6px 12px;
+  padding: 4px 12px;
   font-family: var(--font-mono);
   font-size: 12px;
-  min-height: 0;
+  line-height: 1.4;
 }
 .samp__head {
   position: sticky;
@@ -1112,8 +1112,10 @@
 .atlas__legend {
   position: absolute;
   left: var(--sp-lg);
+  right: var(--sp-lg);
   bottom: var(--sp-sm);
   display: flex;
+  flex-wrap: wrap;
   gap: var(--sp-sm);
   font-size: 11px;
   color: var(--ink-muted);
@@ -1262,6 +1264,13 @@
 @media (max-width: 640px) {
   .overture { padding-top: 92px; }
   .overture__knobs { grid-template-columns: minmax(0, 1fr); }
+  .promptbar {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "label actions" "input input";
+  }
+  .promptbar__label { grid-area: label; }
+  .promptbar__input { grid-area: input; }
+  .promptbar__actions { grid-area: actions; justify-self: end; }
   .block__rail { flex-wrap: wrap; gap: var(--sp-xs); }
   .block__stage { min-width: 76px; }
   .block__wire { display: none; }
