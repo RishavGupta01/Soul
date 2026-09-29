@@ -1,14 +1,14 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Section } from "../shell/Section";
 import { Term } from "../shell/Term";
 import { Stage } from "../viz/Stage";
-import { getRuntime } from "../engine/loader";
 import { heat } from "../viz/Heatmap";
+import { useRuntime } from "../engine/useRuntime";
 
 const DEMO = "the model reads left to right and needs to know which word came first";
 
 export function Positional() {
-  const rt = getRuntime();
+  const rt = useRuntime();
   const [pos, setPos] = useState(7);
   const [n, setN] = useState(24);
 
@@ -25,6 +25,31 @@ export function Positional() {
   const wpe = rt?.model.w.wpe.data ?? null;
   const row = wpe ? Array.from({ length: d }, (_, i) => wpe[(pos % ctx) * d + i]) : [];
   const maxAbs = Math.max(1e-6, ...row.map(Math.abs));
+
+  const heatRef = useRef<HTMLDivElement>(null);
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const headRef = useRef<HTMLDivElement>(null);
+  const [cw, setCw] = useState(7);
+
+  useEffect(() => {
+    const heat = heatRef.current;
+    const wrap = wrapRef.current;
+    const head = headRef.current;
+    if (!heat || !wrap) return;
+    const rows = Math.min(ctx, 48);
+    const measure = () => {
+      const byW = (wrap.clientWidth - 16) / d;
+      const headH = (head ? head.offsetHeight : 18) + 12;
+      const byH = (heat.clientHeight - headH - 20) / rows;
+      const next = Math.max(2, Math.min(10, Math.floor(Math.min(byW, byH))));
+      setCw((c) => (c === next ? c : next));
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(heat);
+    ro.observe(wrap);
+    return () => ro.disconnect();
+  }, [d, ctx]);
 
   return (
     <Section
@@ -81,9 +106,9 @@ export function Positional() {
                 </div>
               </div>
 
-              <div className="pos__heat">
-                <div className="pos__heatHead">POSITION TABLE · first {Math.min(ctx, 48)} rows</div>
-                <div className="pos__heatWrap">
+              <div className="pos__heat" ref={heatRef}>
+                <div className="pos__heatHead" ref={headRef}>POSITION TABLE · first {Math.min(ctx, 48)} rows</div>
+                <div className="pos__heatWrap" ref={wrapRef}>
                   <canvas
                     className="pos__canvas"
                     ref={(c) => {
@@ -91,7 +116,6 @@ export function Positional() {
                       const ctx2 = c.getContext("2d");
                       if (!ctx2) return;
                       const rows = Math.min(ctx, 48);
-                      const cw = 7;
                       const dpr = Math.min(2, window.devicePixelRatio || 1);
                       c.width = d * cw * dpr;
                       c.height = rows * cw * dpr;

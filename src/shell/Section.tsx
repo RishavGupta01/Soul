@@ -1,6 +1,7 @@
 import { useEffect, useRef, type ReactNode } from "react";
 import { useReveal } from "../motion/reveal";
 import { useRunStore } from "../state/useRunStore";
+import { ChapterNav } from "./ChapterNav";
 
 /**
  * One chapter of Act I: a pinned stage (the model) on the left, narration
@@ -73,6 +74,7 @@ export function Section({
               {aside}
             </div>
           )}
+          <ChapterNav index={index} />
         </div>
       </div>
     </section>

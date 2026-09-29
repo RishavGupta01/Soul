@@ -3,9 +3,9 @@ import { Section } from "../shell/Section";
 import { Term } from "../shell/Term";
 import { Stage } from "../viz/Stage";
 import { Heatmap, TokenAxis } from "../viz/Heatmap";
-import { getRuntime } from "../engine/loader";
 import { layerNorm, linear, softmax, type Vec, type Mat } from "../engine/tensor";
 import { prefersReduced } from "../motion/useReducedMotion";
+import { useRuntime } from "../engine/useRuntime";
 
 const DEMO = "the cat sat on the mat because it was warm";
 
@@ -47,7 +47,7 @@ function normalize(m: number[][], keep?: (i: number, j: number) => boolean): num
 }
 
 export function Attention() {
-  const rt = getRuntime();
+  const rt = useRuntime();
   const reduced = prefersReduced();
   const [layer, setLayer] = useState(0);
   const [head, setHead] = useState(0);
@@ -127,6 +127,30 @@ export function Attention() {
     return () => window.clearInterval(id);
   }, [auto, reduced]);
 
+  const mainRef = useRef<HTMLDivElement>(null);
+  const colsRef = useRef<HTMLDivElement>(null);
+  const heatRef = useRef<HTMLDivElement>(null);
+  const [cell, setCell] = useState(16);
+
+  useEffect(() => {
+    const main = mainRef.current;
+    const cols = colsRef.current;
+    const heat = heatRef.current;
+    if (!main || !cols || !heat || n === 0) return;
+    const measure = () => {
+      const legend = heat.querySelector(".att__legend") as HTMLElement | null;
+      const legendH = (legend ? legend.offsetHeight : 19) + 8;
+      const budget = main.clientHeight - cols.offsetHeight - legendH;
+      const next = Math.max(8, Math.min(46, Math.floor(Math.min(budget / n, main.clientWidth / n))));
+      setCell((c) => (c === next ? c : next));
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(main);
+    ro.observe(heat);
+    return () => ro.disconnect();
+  }, [n, stageIdx]);
+
   const stage = ORDER[Math.min(stageIdx, ORDER.length - 1)];
   const q = calc ? calc.Q.map((r) => r[head]) : [];
   const k = calc ? calc.K.map((r) => r[head]) : [];
@@ -204,8 +228,8 @@ export function Attention() {
               <span className="att__formulaNote">{stage.note}</span>
             </p>
 
-            <div className="att__main">
-              <div className="att__cols">
+            <div className="att__main" ref={mainRef}>
+              <div className="att__cols" ref={colsRef}>
                 <TokenAxis tokens={tokens} />
               </div>
 
@@ -250,7 +274,7 @@ export function Attention() {
                   </p>
                 </div>
               ) : (
-                <div className="att__heatWrap">
+                <div className="att__heatWrap" ref={heatRef}>
                   <div className="att__heat">
                     <Heatmap
                       rows={stageRows ?? []}
@@ -259,6 +283,7 @@ export function Attention() {
                       onSelect={setQuery}
                       animate={stage.key === "softmax"}
                       causal={stage.key !== "scores"}
+                      size={cell}
                     />
                     <div className="att__qLine" style={{ top: `${(query / n) * 100}%` }} aria-hidden="true" />
                   </div>

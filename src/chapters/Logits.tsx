@@ -1,17 +1,15 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Section } from "../shell/Section";
 import { Term } from "../shell/Term";
 import { Stage } from "../viz/Stage";
-import { getRuntime } from "../engine/loader";
 import { softmax } from "../engine/tensor";
 import { rankDesc } from "../engine/sampler";
-import { prefersReduced } from "../motion/useReducedMotion";
+import { useRuntime } from "../engine/useRuntime";
 
 const DEMO = "the capital of france is";
 
 export function Logits() {
-  const rt = getRuntime();
-  const reduced = prefersReduced();
+  const rt = useRuntime();
   const [temp, setTemp] = useState(1);
   const [cursor, setCursor] = useState(0);
 
@@ -38,14 +36,6 @@ export function Logits() {
   const hi = result ? Math.max(...result.logits) : 1;
   const peak = result && top.length ? result.logits[top[0]] : 0;
 
-  // live sweep for the "hot" feel while temp changes
-  const [tick, setTick] = useState(0);
-  useEffect(() => {
-    if (reduced) return;
-    const id = window.setInterval(() => setTick((t) => t + 1), 4000);
-    return () => window.clearInterval(id);
-  }, [reduced]);
-
   const pMax = result && top.length ? result.probs[top[0]] : 0;
 
   return (
@@ -70,7 +60,7 @@ export function Logits() {
             </>
           }
         >
-          <div className="logits" key={tick}>
+          <div className="logits">
             <div className="logits__axis">
               <span className="num">+{hi.toFixed(2)}</span>
               <span className="logits__axisLine" aria-hidden="true" />

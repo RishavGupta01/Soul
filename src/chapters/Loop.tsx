@@ -2,13 +2,18 @@ import { useEffect, useRef, useState } from "react";
 import { Section } from "../shell/Section";
 import { Term } from "../shell/Term";
 import { Stage } from "../viz/Stage";
-import { getRuntime } from "../engine/loader";
 import { generate } from "../engine/generate";
 import { useModelStore, type GeneratedStep } from "../state/useModelStore";
 import { useCoreStore } from "../state/useCoreStore";
 import { prefersReduced } from "../motion/useReducedMotion";
+import { useRuntime } from "../engine/useRuntime";
 
 const PROMPT = "the model";
+
+const PHASE_DWELL = 700;
+const TOKEN_GAP = 1400;
+const CYCLE_GAP = PHASE_DWELL + 400;
+const REDUCED_EXTRA = 400;
 
 const PHASES = [
   { key: "feed", label: "feed", note: "prompt ids enter the model" },
@@ -19,7 +24,7 @@ const PHASES = [
 ] as const;
 
 export function Loop() {
-  const rt = getRuntime();
+  const rt = useRuntime();
   const reduced = prefersReduced();
   const [steps, setSteps] = useState<GeneratedStep[]>([]);
   const [phase, setPhase] = useState(0);
@@ -62,7 +67,8 @@ export function Loop() {
     });
 
     let i = 0;
-    const gap = reduced ? 30 : 120;
+    const gap = reduced ? TOKEN_GAP + REDUCED_EXTRA : TOKEN_GAP;
+    const cycleGap = reduced ? CYCLE_GAP + REDUCED_EXTRA : CYCLE_GAP;
 
     const advance = (p: number) => {
       setPhase(p);
@@ -71,34 +77,46 @@ export function Loop() {
 
     const stepFn = () => {
       if (cancel.current) return;
-      advance(1); // forward
+      advance(0); // feed
       window.setTimeout(() => {
         if (cancel.current) return;
-        advance(2); // logits
+        advance(1); // forward
         window.setTimeout(() => {
           if (cancel.current) return;
-          const r = it.next();
-          if (r.done) {
-            stop();
-            return;
-          }
-          advance(3); // sample
-          setSteps((s) => [...s, r.value]);
-          setCtxLen((c) => c + 1);
-          core({ candidates: r.value.top.slice(0, 8).map((c) => ({ text: c.text, p: c.p })), sampled: r.value.tokenText });
+          advance(2); // logits
           window.setTimeout(() => {
             if (cancel.current) return;
-            advance(4); // append
-            i++;
-            timer.current = window.setTimeout(stepFn, gap);
-          }, gap * 0.4);
-        }, gap * 0.4);
-      }, gap * 0.4);
+            const r = it.next();
+            if (r.done) {
+              stop();
+              return;
+            }
+            advance(3); // sample
+            setSteps((s) => [...s, r.value]);
+            setCtxLen((c) => c + 1);
+            core({ candidates: r.value.top.slice(0, 8).map((c) => ({ text: c.text, p: c.p })), sampled: r.value.tokenText });
+            window.setTimeout(() => {
+              if (cancel.current) return;
+              advance(4); // append
+              i++;
+              timer.current = window.setTimeout(stepFn, cycleGap);
+            }, PHASE_DWELL);
+          }, PHASE_DWELL);
+        }, PHASE_DWELL);
+      }, PHASE_DWELL);
     };
 
     advance(0);
     timer.current = window.setTimeout(stepFn, gap);
   };
+
+  // Open the chapter already thinking rather than waiting for a click.
+  useEffect(() => {
+    if (!rt) return;
+    const t = window.setTimeout(() => start(), 500);
+    return () => window.clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rt]);
 
   const text = steps.map((s) => s.tokenText).join("");
   const last = steps[steps.length - 1];

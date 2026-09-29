@@ -3,9 +3,13 @@ import { useGeneration } from "../engine/useGeneration";
 import { useModelStore } from "../state/useModelStore";
 import { useCoreStore } from "../state/useCoreStore";
 import { BrainCore } from "../viz/BrainCore";
+import { ThinkNet } from "../viz/ThinkNet";
 import { prefersReduced } from "../motion/useReducedMotion";
 
 const START_PROMPT = "Attention is ";
+
+const TOKEN_GAP_MS = 260;
+const TOKEN_GAP_REDUCED_MS = 320;
 
 export function Overture() {
   const { run, stop, steps, running, status, setPrompt } = useGeneration();
@@ -44,7 +48,7 @@ export function Overture() {
   const onGenerate = () => {
     setPrompt(localPrompt);
     setStore({ prompt: localPrompt });
-    run({ prompt: localPrompt, maxTokens: 84, gap: prefersReduced() ? 40 : 130 });
+    run({ prompt: localPrompt, maxTokens: 84, gap: prefersReduced() ? TOKEN_GAP_REDUCED_MS : TOKEN_GAP_MS });
   };
 
   const last = stats[stats.length - 1];
@@ -73,6 +77,16 @@ export function Overture() {
           running its actual math in your browser — tokens in, attention arcs drawn, a
           distribution collapsed into one sampled token.
         </p>
+
+        <ThinkNet
+          passes={last?.passes}
+          running={running}
+          tokenCount={stats.length}
+          context={[
+            ...localPrompt.split(/\s+/).filter(Boolean),
+            ...stats.map((s) => s.tokenText),
+          ]}
+        />
 
         <div className="overture__console" data-reveal>
           <div className="promptbar">

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useAtlasStore, type AtlasNode } from "../state/useAtlasStore";
 import { getRuntime, trainingPoints } from "../engine/loader";
 import { useRunStore } from "../state/useRunStore";
+import { useRuntime } from "../engine/useRuntime";
 
 type DetailId = AtlasNode["id"] | "glossary";
 
@@ -10,7 +11,7 @@ export function Atlas() {
   const [hover, setHover] = useState<string | null>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const reach = useRunStore((s) => s.reach);
-  const rt = getRuntime();
+  const rt = useRuntime();
 
   useEffect(() => {
     reach(7);

@@ -54,7 +54,7 @@ export const useRunStore = create<RunState>()(
       setFastForward: (fastForward) => set({ fastForward }),
     }),
     {
-      name: "obsidian-run",
+      name: "obsidian-run-v2",
       partialize: (s) => ({ reached: s.reached, atlasUnlocked: s.atlasUnlocked }),
     }
   )

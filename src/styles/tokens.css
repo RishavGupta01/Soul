@@ -59,7 +59,7 @@
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
   --fs-2xs: 13px;
-  --fs-sm: 15px;
+  --fs-sm: 16px;
   --fs-base: 17px;
   --fs-md: 22px;
   --fs-lg: 30px;
@@ -67,6 +67,8 @@
   --fs-2xl: 54px;
   --fs-3xl: 72px;
   --fs-4xl: 96px;
+
+  --lh-prose: 1.65;
 
   --measure: 68ch;
   --stage-w: 62vw;

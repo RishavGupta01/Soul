@@ -1,19 +1,10 @@
 {
   "width": 1440,
   "height": 900,
-  "wait": 3500,
+  "wait": 6000,
   "shots": [
-    {
-      "hash": "#/",
-      "path": "C:\\Users\\RISHAV~1\\AppData\\Local\\Temp\\opencode\\probe-fonts.png",
-      "pause": 1200,
-      "eval": "JSON.stringify((function(){var m={};document.querySelectorAll('h1,h2,h3,p,li,span,button,a,code,div').forEach(function(e){var b=e.getBoundingClientRect();if(b.width<1||b.height<1)return;if(e.closest('svg'))return;var f=getComputedStyle(e).fontFamily.split(',')[0].trim().replace(/^[\"']|[\"']$/g,'');m[f]=(m[f]||0)+1;});return m;})())"
-    },
-    {
-      "hash": "#/loop",
-      "path": "C:\\Users\\RISHAV~1\\AppData\\Local\\Temp\\opencode\\probe-fonts2.png",
-      "pause": 1500,
-      "eval": "JSON.stringify((function(){var m={};document.querySelectorAll('h1,h2,h3,p,li,span,button,a,code,div,.num,.readout__v').forEach(function(e){var b=e.getBoundingClientRect();if(b.width<1||b.height<1)return;if(e.closest('svg'))return;var f=getComputedStyle(e).fontFamily.split(',')[0].trim().replace(/^[\"']|[\"']$/g,'');m[f]=(m[f]||0)+1;});var tab=0,not=0;document.querySelectorAll('.num,.readout__v,.knob__val,.orb__v,.orb__val').forEach(function(e){((getComputedStyle(e).fontVariantNumeric||'').indexOf('tabular-nums')>=0)?tab++:not++;});return {fonts:m, tabular:{yes:tab,no:not}};})())"
-    }
+    { "hash": "#/embeddings", "path": "C:\\Users\\RISHAV~1\\AppData\\Local\\Temp\\opencode\\v0.png", "pause": 4000 },
+    { "hash": "#/sampling",   "path": "C:\\Users\\RISHAV~1\\AppData\\Local\\Temp\\opencode\\v1.png", "pause": 4000 },
+    { "hash": "#/loop",       "path": "C:\\Users\\RISHAV~1\\AppData\\Local\\Temp\\opencode\\v2.png", "pause": 7000 }
   ]
 }

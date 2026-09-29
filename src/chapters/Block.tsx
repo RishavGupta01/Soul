@@ -2,10 +2,12 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Section } from "../shell/Section";
 import { Term } from "../shell/Term";
 import { Stage } from "../viz/Stage";
-import { getRuntime } from "../engine/loader";
 import { prefersReduced } from "../motion/useReducedMotion";
+import { useRuntime } from "../engine/useRuntime";
 
 const DEMO = "attention is a weighted";
+
+const STAGE_MS = 1200;
 
 const STAGES = [
   { key: "x", label: "x", sub: "input" },
@@ -18,7 +20,7 @@ const STAGES = [
 ] as const;
 
 export function Block() {
-  const rt = getRuntime();
+  const rt = useRuntime();
   const [layer, setLayer] = useState(0);
   const [head, setHead] = useState(0);
   const [cursor, setCursor] = useState(0);
@@ -47,16 +49,27 @@ export function Block() {
 
   // ambient flow animation along the rail
   const [flow, setFlow] = useState(reduced ? 1 : 0);
+  const pulses = useRef<(HTMLSpanElement | null)[]>([]);
   useEffect(() => {
     if (reduced) {
       setFlow(1);
+      for (const el of pulses.current) if (el) el.style.left = "0%";
       return;
     }
     let raf = 0;
     let t = 0;
-    const tick = () => {
-      t = (t + 0.006) % 1;
-      setFlow(t);
+    let last = 0;
+    let stage = Math.min(STAGES.length - 1, Math.floor(t * STAGES.length));
+    const tick = (now: number) => {
+      const dt = last ? now - last : 0;
+      last = now;
+      t = (t + dt / (STAGE_MS * STAGES.length)) % 1;
+      for (const el of pulses.current) if (el) el.style.left = `${(t * 100) % 100}%`;
+      const s = Math.min(STAGES.length - 1, Math.floor(t * STAGES.length));
+      if (s !== stage) {
+        stage = s;
+        setFlow(t);
+      }
       raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
@@ -109,7 +122,13 @@ export function Block() {
                   <span className="block__sub">{s.sub}</span>
                   {i < STAGES.length - 1 && (
                     <span className="block__wire" aria-hidden="true">
-                      <span className="block__pulse" style={{ left: `${(flow * 100) % 100}%` }} />
+                      <span
+                      className="block__pulse"
+                      ref={(el) => {
+                        pulses.current[i] = el;
+                      }}
+                      style={{ left: "0%" }}
+                    />
                     </span>
                   )}
                 </div>

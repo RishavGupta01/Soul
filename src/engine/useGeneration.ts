@@ -3,6 +3,9 @@ import { generate } from "./generate";
 import { getRuntime } from "./loader";
 import { useModelStore, type GeneratedStep } from "../state/useModelStore";
 
+const DEFAULT_GAP_MS = 240;
+const FIRST_TOKEN_DELAY_MS = 400;
+
 /**
  * Drives a real autoregressive pass at watchable speed.
  * Pacing is decoupled from compute: we do a genuine forward pass, then hold
@@ -52,7 +55,7 @@ export function useGeneration() {
       patch({ running: true, steps: [], output: "" });
 
       const p = opts?.prompt ?? prompt;
-      const gap = opts?.gap ?? 140;
+      const gap = opts?.gap ?? DEFAULT_GAP_MS;
       const maxTokens = opts?.maxTokens ?? 96;
 
       const it = generate(rt.model, rt.tokenizer, {
@@ -79,7 +82,7 @@ export function useGeneration() {
         opts?.onStep?.(step, acc.map((s) => s.tokenText).join(""));
         timerRef.current = window.setTimeout(tick, gap);
       };
-      timerRef.current = window.setTimeout(tick, 60);
+      timerRef.current = window.setTimeout(tick, FIRST_TOKEN_DELAY_MS);
     },
     [prompt, temperature, topK, topP, seed, status, patch]
   );

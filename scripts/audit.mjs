@@ -33,6 +33,28 @@ const CHECK = `JSON.stringify((function(){
     var sy = st.scrollHeight - st.clientHeight;
     var sx = st.scrollWidth - st.clientWidth;
     if (sy > 2 || sx > 2) out.issues.push("stage-clip dy=" + sy + " dx=" + sx);
+    // Stage fill: how much of the stage box does the scene actually occupy?
+    var sb = st.querySelector(".stage-body");
+    if (sb) {
+      var sr = sb.getBoundingClientRect();
+      var kids = Array.prototype.filter.call(sb.children, function (c) {
+        var r = c.getBoundingClientRect();
+        return r.width > 4 && r.height > 4;
+      });
+      if (kids.length && sr.height > 40) {
+        var top = Infinity, bot = -Infinity, left = Infinity, right = -Infinity;
+        kids.forEach(function (c) {
+          var r = c.getBoundingClientRect();
+          top = Math.min(top, r.top); bot = Math.max(bot, r.bottom);
+          left = Math.min(left, r.left); right = Math.max(right, r.right);
+        });
+        var fillY = Math.round(((bot - top) / sr.height) * 100);
+        var fillX = Math.round(((right - left) / sr.width) * 100);
+        out.fill = [fillX, fillY];
+        if (fillY < 78) out.issues.push("stage-empty-y " + fillY + "%");
+        if (fillX < 72) out.issues.push("stage-empty-x " + fillX + "%");
+      }
+    }
   }
 
   var p = document.querySelector(".chapter__placard");
@@ -136,7 +158,8 @@ ROUTES.forEach((hash, i) => {
   const issues = parsed?.issues ?? ["NO-AUDIT-RESULT"];
   const ok = issues.length === 0;
   if (!ok) failures++;
-  console.log(`${ok ? "PASS" : "FAIL"}  ${hash.padEnd(20)} ${issues.join(" | ")}`);
+  const fill = parsed?.fill ? ` fill ${parsed.fill[0]}%×${parsed.fill[1]}%` : "";
+  console.log(`${ok ? "PASS" : "FAIL"}  ${hash.padEnd(20)} ${issues.join(" | ")}${fill}`);
 });
 
 if (r.errors?.length) {

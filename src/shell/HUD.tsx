@@ -50,7 +50,7 @@ export function HUD() {
           className="orb"
           onClick={() => setFastForward(!fastForward)}
           aria-pressed={fastForward}
-          title="Skip to the atlas"
+          title="Skip reveal animations"
         >
           <span className="orb__label">JUMP</span>
           <span className="orb__val">{fastForward ? "ON" : "OFF"}</span>

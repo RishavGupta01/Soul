@@ -2,17 +2,22 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Section } from "../shell/Section";
 import { Term } from "../shell/Term";
 import { Stage } from "../viz/Stage";
-import { getRuntime } from "../engine/loader";
+import { useRuntime } from "../engine/useRuntime";
 
 const WORDS = [
-  "cat", "dog", "wolf", "lion", "horse", "rat",
-  "king", "queen", "prince", "man", "woman", "person",
-  "attention", "layer", "token", "model", "neural", "gradient",
-  "the", "a", "and", "is", "of", "to",
+  "cat", "dog", "wolf", "lion", "horse", "rat", "bird", "fish", "snake", "tiger", "bear", "deer",
+  "king", "queen", "prince", "princess", "man", "woman", "person", "child", "boy", "girl",
+  "attention", "layer", "token", "model", "neural", "gradient", "weight", "vector", "matrix",
+  "tensor", "loss", "batch", "optimizer", "embedding", "network", "dataset", "training",
+  "the", "a", "an", "and", "is", "of", "to", "in", "on", "for", "with", "that", "this",
+  "run", "walk", "think", "learn", "write", "read", "jump", "sleep", "eat", "make",
+  "computer", "science", "data", "code", "python", "engine", "server", "research",
+  "city", "river", "mountain", "ocean", "forest", "desert", "island", "valley",
+  "red", "blue", "green", "gold", "black", "white", "dark", "bright",
 ];
 
 export function Embeddings() {
-  const rt = getRuntime();
+  const rt = useRuntime();
   const [sel, setSel] = useState(0);
   const canvas = useRef<HTMLCanvasElement>(null);
 
@@ -94,6 +99,17 @@ export function Embeddings() {
     [active]
   );
 
+  const [sizeKey, setSizeKey] = useState(0);
+
+  useEffect(() => {
+    const c = canvas.current;
+    const box = c?.parentElement;
+    if (!box) return;
+    const ro = new ResizeObserver(() => setSizeKey((k) => k + 1));
+    ro.observe(box);
+    return () => ro.disconnect();
+  }, []);
+
   useEffect(() => {
     const c = canvas.current;
     if (!c || !proj.length) return;
@@ -109,13 +125,33 @@ export function Embeddings() {
     ctx.clearRect(0, 0, W, H);
 
     const pad = 34;
-    // axes
+    // plot frame + grid
     ctx.strokeStyle = "rgba(255,255,255,0.08)";
     ctx.lineWidth = 1;
     ctx.strokeRect(pad, pad, W - pad * 2, H - pad * 2);
+    ctx.strokeStyle = "rgba(255,255,255,0.05)";
+    for (let g = 1; g < 8; g++) {
+      const gx = pad + ((W - pad * 2) * g) / 8;
+      const gy = pad + ((H - pad * 2) * g) / 8;
+      ctx.beginPath();
+      ctx.moveTo(gx, pad);
+      ctx.lineTo(gx, H - pad);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(pad, gy);
+      ctx.lineTo(W - pad, gy);
+      ctx.stroke();
+    }
 
     // cluster hulls: group by prefix
-    const groups = ["cat|dog|wolf|lion|horse|rat", "king|queen|prince|man|woman|person", "attention|layer|token|model|neural|gradient", "the|a|and|is|of|to"];
+    const groups = [
+      "cat|dog|wolf|lion|horse|rat|bird|fish|snake|tiger|bear|deer",
+      "king|queen|prince|princess|man|woman|person|child|boy|girl",
+      "attention|layer|token|model|neural|gradient|weight|vector|matrix|tensor|loss|embedding",
+      "the|a|an|and|is|of|to|in|on|for|with|that|this",
+      "city|river|mountain|ocean|forest|desert|island|valley",
+      "red|blue|green|gold|black|white|dark|bright",
+    ];
     groups.forEach((g, gi) => {
       const set = new Set(g.split("|"));
       const pts = proj.filter((p) => set.has(p.word));
@@ -153,7 +189,7 @@ export function Embeddings() {
       ctx.fillStyle = isSel ? "#3DE8FF" : "rgba(138,138,153,0.9)";
       ctx.fillText(p.word, x + 8, y + 3);
     });
-  }, [proj, sel]);
+  }, [proj, sel, sizeKey]);
 
   return (
     <Section

@@ -1,13 +1,26 @@
 import { useEffect, useState } from "react";
-import { CHAPTERS, useRunStore } from "../state/useRunStore";
+import { CHAPTERS, useRunStore, type ChapterDef } from "../state/useRunStore";
+
+function matchScore(route: string, c: ChapterDef): number {
+  if (c.route === "#/") return route === "#/" ? 2 : 1;
+  if (route === c.route || route.startsWith(c.route + "/")) return c.route.length;
+  return -1;
+}
 
 export function ChapterRail() {
   const route = useRunStore((s) => s.route);
   const reached = useRunStore((s) => s.reached);
   const [open, setOpen] = useState(false);
 
-  const activeIdx = CHAPTERS.findIndex((c) => route.startsWith(c.route) && c.route !== "#/");
-  const active = activeIdx >= 0 ? activeIdx : 0;
+  let active = 0;
+  let best = -1;
+  CHAPTERS.forEach((c, i) => {
+    const score = matchScore(route, c);
+    if (score > best) {
+      best = score;
+      active = i;
+    }
+  });
 
   const go = (i: number) => {
     const c = CHAPTERS[i];
@@ -17,14 +30,16 @@ export function ChapterRail() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
-      if (e.key === "ArrowRight" || e.key === "ArrowDown") {
-        e.preventDefault();
-        go(Math.min(CHAPTERS.length - 1, active + 1));
-      } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
-        e.preventDefault();
-        go(Math.max(0, active - 1));
-      }
+      if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+      const t = e.target;
+      if (!(t instanceof Element) || !t.closest(".rail")) return;
+      if (t instanceof HTMLInputElement || t instanceof HTMLTextAreaElement) return;
+      e.preventDefault();
+      go(
+        e.key === "ArrowRight"
+          ? Math.min(CHAPTERS.length - 1, active + 1)
+          : Math.max(0, active - 1)
+      );
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -36,6 +51,10 @@ export function ChapterRail() {
       aria-label="Chapters"
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
+      onFocus={() => setOpen(true)}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setOpen(false);
+      }}
     >
       <button
         type="button"
@@ -46,8 +65,13 @@ export function ChapterRail() {
       >
         <span className="rail__current">{String(CHAPTERS[active].index).padStart(2, "0")}</span>
         <span className="rail__ticks" aria-hidden="true">
-          {CHAPTERS.map((c, i) => (
-            <span key={c.id} className={`rail__tick ${i === active ? "is-active" : ""} ${i <= reached ? "is-seen" : ""}`} />
+          {CHAPTERS.map((c) => (
+            <span
+              key={c.id}
+              className={`rail__tick ${c.route === CHAPTERS[active].route ? "is-active" : ""} ${
+                c.index <= reached ? "is-seen" : ""
+              }`}
+            />
           ))}
         </span>
       </button>
@@ -57,7 +81,9 @@ export function ChapterRail() {
           <li key={c.id}>
             <a
               href={c.route}
-              className={`rail__item ${i === active ? "is-active" : ""} ${i <= reached ? "is-seen" : ""}`}
+              className={`rail__item ${i === active ? "is-active" : ""} ${
+                c.index <= reached ? "is-seen" : ""
+              }`}
               onClick={() => setOpen(false)}
             >
               <span className="rail__idx num">{String(c.index).padStart(2, "0")}</span>

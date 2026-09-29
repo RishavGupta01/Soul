@@ -2,13 +2,15 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Section } from "../shell/Section";
 import { Term } from "../shell/Term";
 import { Stage } from "../viz/Stage";
-import { getRuntime } from "../engine/loader";
 import { useReducedMotion } from "../motion/useReducedMotion";
+import { useRuntime } from "../engine/useRuntime";
 
 const TEXT = "attention is all you need";
 
+const AUTOPLAY_MS = 1000;
+
 export function Tokenization() {
-  const rt = getRuntime();
+  const rt = useRuntime();
   const reduced = useReducedMotion();
   const [phase, setPhase] = useState(0); // 0 = bytes, 1..n = after n merges applied
   const [playing, setPlaying] = useState(true);
@@ -61,7 +63,7 @@ export function Tokenization() {
     if (!playing || reduced) return;
     timer.current = window.setInterval(() => {
       setPhase((p) => (p >= maxFrame ? 0 : p + 1));
-    }, 700);
+    }, AUTOPLAY_MS);
     return () => {
       if (timer.current) window.clearInterval(timer.current);
     };
@@ -136,7 +138,7 @@ export function Tokenization() {
 
             <div className="bpe__log">
               <div className="bpe__logHead">MERGE LOG</div>
-              {frame?.applied.slice(-8).map((m) => (
+              {frame?.applied.slice(-11).map((m) => (
                 <div className="bpe__logRow mono" key={m.rank}>
                   <span className="bpe__logRank">{String(m.rank).padStart(3, "0")}</span>
                   <span>

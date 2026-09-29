@@ -1,4 +1,6 @@
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+
+const ROW_STAGGER_MS = 180;
 
 /**
  * Attention heatmap. Heat scale is fixed: void -> violet -> white, so cells
@@ -27,18 +29,19 @@ export function Heatmap({
   const n = rows.length;
   const cell = size || Math.max(8, Math.min(46, Math.floor(340 / Math.max(4, n))));
 
-  const targetRows = useRef(animate ? 0 : n);
+  const [shown, setShown] = useState(animate ? 0 : n);
   useEffect(() => {
     if (!animate) {
-      targetRows.current = n;
+      setShown(n);
       return;
     }
     let i = 0;
+    setShown(0);
     const id = window.setInterval(() => {
       i++;
-      targetRows.current = Math.min(n, i);
+      setShown(Math.min(n, i));
       if (i >= n) window.clearInterval(id);
-    }, Math.max(16, Math.min(70, 900 / n)));
+    }, ROW_STAGGER_MS);
     return () => window.clearInterval(id);
   }, [n, animate]);
 
@@ -56,7 +59,6 @@ export function Heatmap({
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, W, n * cell);
 
-    const shown = targetRows.current;
     for (let i = 0; i < Math.min(shown, n); i++) {
       const row = rows[i];
       for (let j = 0; j < Math.min(row.length, n); j++) {
@@ -82,7 +84,7 @@ export function Heatmap({
       ctx.strokeStyle = "rgba(61,232,255,0.4)";
       ctx.strokeRect(query * cell + 0.75, 0, cell - 1.5, n * cell - 1.5);
     }
-  }, [rows, n, cell, query, causal]);
+  }, [rows, n, cell, query, causal, shown]);
 
   return (
     <canvas

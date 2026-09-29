@@ -1,8 +1,8 @@
 {
-  "steps": 23600,
+  "steps": 25455,
   "firstVal": 5.890871551692469,
-  "bestVal": 0.10909206860589588,
-  "lastVal": 0.11944959413873764,
+  "bestVal": 0.09785320621925014,
+  "lastVal": 0.11751029636997047,
   "history": [
     [
       1,
@@ -598,6 +598,51 @@
       23600,
       0.12249315933278412,
       0.11944959413873764
+    ],
+    [
+      23800,
+      0.10533337484356069,
+      0.11600248551801255
+    ],
+    [
+      24000,
+      0.09103029623417078,
+      0.11190267390604401
+    ],
+    [
+      24200,
+      0.1036100676659727,
+      0.10968896091976643
+    ],
+    [
+      24400,
+      0.13100177589878753,
+      0.12531312247659177
+    ],
+    [
+      24600,
+      0.12257847585882052,
+      0.09785320621925014
+    ],
+    [
+      24800,
+      0.11439430668311555,
+      0.11292747876058057
+    ],
+    [
+      25000,
+      0.09758795854118181,
+      0.11522309584292123
+    ],
+    [
+      25200,
+      0.12884680082127387,
+      0.11577639917857337
+    ],
+    [
+      25400,
+      0.11151208626321078,
+      0.11751029636997047
     ]
   ],
   "vocabSize": 384,
@@ -610,6 +655,8 @@
     "dFfn": 192,
     "contextLength": 64
   },
-  "sample": "as a compact vector of numbers because the training data showed it many examples.\nA query vector learns a hidden state.\nEvery token is just a list of numbers, and each number projects a small piece of",
-  "running": true
+  "sample": "becomes better at prediction.\nA transforms the position of every token.\nThe language model forward po the optimizer aligns the structure of language.\nThe token attends to a pattern in the data through gradient ",
+  "weightsKB": 1108,
+  "seconds": 9001,
+  "running": false
 }

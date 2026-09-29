@@ -2,15 +2,15 @@ import { useMemo, useState } from "react";
 import { Section } from "../shell/Section";
 import { Term } from "../shell/Term";
 import { Stage } from "../viz/Stage";
-import { getRuntime } from "../engine/loader";
 import { sample, rankDesc, entropy } from "../engine/sampler";
 import { softmax } from "../engine/tensor";
+import { useRuntime } from "../engine/useRuntime";
 
 const DEMO = "the capital of france is";
 
 export function Sampling() {
-  const rt = getRuntime();
-  const [temp, setTemp] = useState(0.8);
+  const rt = useRuntime();
+  const [temp, setTemp] = useState(1.5);
   const [topK, setTopK] = useState(40);
   const [topP, setTopP] = useState(0.95);
   const [seed, setSeed] = useState(7);
@@ -66,7 +66,7 @@ export function Sampling() {
     return sample(base.logits, { temperature: temp, topK, topP, seed: seed * 977 + (roll ?? 0) });
   }, [base, view, temp, topK, topP, seed, roll]);
 
-  const rows = base ? base.order.slice(0, 30) : [];
+  const rows = base ? base.order.slice(0, 20) : [];
   const pTop = view && rows.length ? view.final[rows[0]] : 0;
   const H = view ? entropy(Float64Array.from(view.final)) : 0;
 
@@ -252,7 +252,7 @@ function Meter({ v, accent }: { v: number; accent?: boolean }) {
     <span className="samp__meter">
       <span
         className={`samp__meterFill ${accent ? "is-accent" : ""} ${v === 0 ? "is-zero" : ""}`}
-        style={{ width: `${Math.max(v > 0 ? 1.5 : 0, Math.min(100, v * 100))}%` }}
+        style={{ width: `${Math.max(v > 0 ? 12 : 0, Math.min(100, v * 100))}%` }}
       />
     </span>
   );

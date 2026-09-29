@@ -9,6 +9,20 @@ export interface TokenEvent {
   step: number;
 }
 
+export interface LayerPass {
+  layer: number;
+  /** 0..1 — how concentrated the last-position attention row is (1 = one key wins) */
+  attnFocus: number;
+  /** 0..1 — relative size of the FFN's contribution to the residual stream */
+  ffnEnergy: number;
+  /** per-head peak attention probability at the query position */
+  headPeak: number[];
+  /** the context positions this layer leaned on hardest */
+  attnTop: { k: number; w: number }[];
+  /** mean absolute activation of the residual stream entering the block */
+  hiddenEnergy: number;
+}
+
 export interface GeneratedStep {
   /** index in the full sequence */
   pos: number;
@@ -19,6 +33,8 @@ export interface GeneratedStep {
   entropy: number;
   /** which sampler knobs were used */
   temperature: number;
+  /** real per-layer measurements from this token's forward pass */
+  passes?: LayerPass[];
 }
 
 export type TrainingMetricsData = TrainingMetrics;

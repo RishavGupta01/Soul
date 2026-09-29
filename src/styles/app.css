@@ -274,7 +274,9 @@
   background:
     radial-gradient(ellipse at 50% 45%, rgba(61, 232, 255, 0.05), transparent 62%),
     var(--panel);
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: thin;
 }
 .stage-inner {
   position: relative;
@@ -283,6 +285,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.chapter__stage .stage-body {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  align-items: safe center;
 }
 .chapter__placard {
   max-width: var(--measure);
@@ -332,6 +339,64 @@
 }
 .chapter--wide .chapter__grid {
   grid-template-columns: minmax(0, 1fr);
+}
+
+/* ---------------- Prev / next chapter bar ---------------- */
+.chapter__nav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-xs);
+  margin-top: var(--sp-lg);
+  padding-top: var(--sp-md);
+  border-top: 1px solid var(--hairline);
+}
+.chapter__nav-link {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: flex-start;
+  gap: var(--sp-2xs) var(--sp-xs);
+  min-height: 44px;
+  padding: var(--sp-xs) var(--sp-sm);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-sm);
+  text-decoration: none;
+  transition: border-color var(--dur-short) var(--ease-enter),
+    background var(--dur-short) var(--ease-enter);
+}
+.chapter__nav-link:hover {
+  border-color: rgba(61, 232, 255, 0.55);
+  background: rgba(61, 232, 255, 0.05);
+}
+.chapter__nav-link:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+.chapter__nav-link--next {
+  justify-content: flex-end;
+  text-align: right;
+}
+.chapter__nav-dir {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+.chapter__nav-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--ink);
+  transition: color var(--dur-short) var(--ease-enter);
+}
+.chapter__nav-link:hover .chapter__nav-title {
+  color: var(--cyan);
+}
+.chapter__nav-arrow {
+  font-family: var(--font-mono);
+  color: var(--cyan);
 }
 
 /* ---------------- Instrument readouts ---------------- */
@@ -707,5 +772,8 @@
     padding: 4px 6px;
     gap: 5px;
     font-size: 9px;
+  }
+  .chapter__nav {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
